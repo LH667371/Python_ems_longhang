@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>emplist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
+    <script type="text/javascript">
+        window.alert = function (msg, callback) {
+            let div = document.createElement("div");
+            div.innerHTML = "<style type=\"text/css\">"
+                + ".nbaMask { position: fixed; z-index: 1000; top: 0; right: 0; left: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); }                                                                                                                                                                       "
+                + ".nbaMaskTransparent { position: fixed; z-index: 1000; top: 0; right: 0; left: 0; bottom: 0; }                                                                                                                                                                                            "
+                + ".nbaDialog { position: fixed; z-index: 5000; width: 80%; max-width: 300px; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); background-color: #fff; text-align: center; border-radius: 8px; overflow: hidden; opacity: 1; color: white; }"
+                + ".nbaDialog .nbaDialogHd { padding: .2rem .27rem .08rem .27rem; }                                                                                                                                                                                                                         "
+                + ".nbaDialog .nbaDialogHd .nbaDialogTitle { font-size: 17px; font-weight: 400; }                                                                                                                                                                                                           "
+                + ".nbaDialog .nbaDialogBd { padding: 0 .27rem; font-size: 15px; line-height: 1.3; word-wrap: break-word; word-break: break-all; color: #000000; }                                                                                                                                          "
+                + ".nbaDialog .nbaDialogFt { position: relative; line-height: 48px; font-size: 17px; display: -webkit-box; display: -webkit-flex; display: flex; }                                                                                                                                          "
+                + ".nbaDialog .nbaDialogFt:after { content: \" \"; position: absolute; left: 0; top: 0; right: 0; height: 1px; border-top: 1px solid #e6e6e6; color: #e6e6e6; -webkit-transform-origin: 0 0; transform-origin: 0 0; -webkit-transform: scaleY(0.5); transform: scaleY(0.5); }               "
+                + ".nbaDialog .nbaDialogBtn { display: block; -webkit-box-flex: 1; -webkit-flex: 1; flex: 1; color: #09BB07; text-decoration: none; -webkit-tap-highlight-color: transparent; position: relative; margin-bottom: 0; }                                                                       "
+                + ".nbaDialog .nbaDialogBtn:after { content: \" \"; position: absolute; left: 0; top: 0; width: 1px; bottom: 0; border-left: 1px solid #e6e6e6; color: #e6e6e6; -webkit-transform-origin: 0 0; transform-origin: 0 0; -webkit-transform: scaleX(0.5); transform: scaleX(0.5); }             "
+                + ".nbaDialog a { text-decoration: none; -webkit-tap-highlight-color: transparent; }"
+                + "</style>"
+                + "<div id=\"dialogs2\" style=\"display: none\">"
+                + "<div class=\"nbaMask\"></div>"
+                + "<div class=\"nbaDialog\">"
+                + "    <div class=\"nbaDialogHd\">"
+                + "        <strong class=\"nbaDialogTitle\"></strong>"
+                + "    </div>"
+                + "    <div class=\"nbaDialogBd\" id=\"dialog_msg2\">弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内</div>"
+                + "    <div class=\"nbaDialogHd\">"
+                + "        <strong class=\"nbaDialogTitle\"></strong>"
+                + "    </div>"
+                + "    <div class=\"nbaDialogFt\">"
+                + "        <a href=\"javascript:;\" class=\"nbaDialogBtn nbaDialogBtnPrimary\" id=\"dialog_ok2\">确定</a>"
+                + "    </div></div></div>";
+            document.body.appendChild(div);
+
+            let dialogs2 = document.getElementById("dialogs2");
+            dialogs2.style.display = 'block';
+
+            let dialog_msg2 = document.getElementById("dialog_msg2");
+            dialog_msg2.innerHTML = msg;
+            let dialog_ok2 = document.getElementById("dialog_ok2");
+            dialog_ok2.onclick = function () {
+                dialogs2.style.display = 'none';
+                callback();
+            };
+        };
+
+        function del(user_id, number) {
+            if (confirm('您确认删除吗？'))
+                location.href = '/del_data?id=' + user_id + '&number=' + number;
+        }
+
+        function exit() {
+            if (confirm('您确认退出吗？'))
+                location.href = '/exit/';
+        }
+    </script>
+    <style type="text/css">
+        .a {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #e1e2e3;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        .b {
+            border: 0;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            line-height: 20px;
+            background-color: bisque;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="top_content">
+        <div id="header">
+            <div id="rightheader">
+                <p>
+                    2021/02/27
+                    <br/>
+                </p>
+            </div>
+            <div id="topheader">
+                <h1 id="title">
+                    <a href="/emplist/">Main</a>
+                </h1>
+            </div>
+            <div id="navigation">
+            </div>
+        </div>
+        <div id="content">
+            <p id="whereami">
+            </p>
+            <h1>
+                Welcome <span style="color: brown">{{ name }}</span> login!
+            </h1>
+            <table class="table">
+                <tr class="table_header">
+                    <td>ID</td>
+                    <td>Head pic</td>
+                    <td>Name</td>
+                    <td>Salary</td>
+                    <td>Age</td>
+                    <td>Sex</td>
+                    <td>Birthday</td>
+                    <td>Department</td>
+                    <td>Operation</td>
+                </tr>
+                {% for user in page.object_list %}
+                    {% if forloop.counter0|divisibleby:2 %}
+                        <tr class="row1">
+                            <td>{{ user.id }}</td>
+                            <td><img src="/static/{{ user.head_pic }}" alt="" width="80px"></td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.salary }}元</td>
+                            <td>{{ user.age }}</td>
+                            <td>{{ user.sex }}</td>
+                            <td>{{ user.birthday|date:'Y-m-d' }}</td>
+                            <td>{{ user.depart.department }}</td>
+                            <td><a onclick="del({{ user.id }}, {{ page.number }})">删除</a>&nbsp;<a
+                                    href="/update?id={{ user.id }}&number={{ page.number }}">修改</a></td>
+                        </tr>
+                    {% else %}
+                        <tr class="row2">
+                            <td>{{ user.id }}</td>
+                            <td><img src="/static/{{ user.head_pic }}" alt="" width="80px"></td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.salary }}元</td>
+                            <td>{{ user.age }}</td>
+                            <td>{{ user.sex }}</td>
+                            <td>{{ user.birthday|date:'Y-m-d' }}</td>
+                            <td>{{ user.depart.department }}</td>
+                            <td><a onclick="del({{ user.id }}, {{ page.number }})">删除</a>&nbsp;<a
+                                    href="/update?id={{ user.id }}&number={{ page.number }}">修改</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </table>
+            <p align="center">
+                {% if page.has_previous %}
+                    <a href="/emplist/?number={{ page.previous_page_number }}">上一页</a>
+                {% endif %}
+                {% for n in page.paginator.page_range %}
+                    {% if page.number == n %}
+                        <a class="b" href="/emplist/?number={{ n }}">{{ n }}</a>
+                    {% else %}
+                        <a class="a" href="/emplist/?number={{ n }}">{{ n }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page.has_next %}
+                    <a href="/emplist/?number={{ page.next_page_number }}">下一页</a>
+                {% endif %}
+            </p>
+            <p>
+                <input type="button" class="button" value="添加员工" onclick="location='/addemp?number={{ page.number }}'"/>
+                <input type="button" class="button" value="退出系统" onclick="exit()"/>
+            </p>
+        </div>
+    </div>
+    <div id="footer">
+        <div id="footer_bg">
+            ABC@126.com
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    window.onload = function () {
+        {% if info %}
+            alert('{{ info }}')
+        {% endif %}
+    }
+</script>
+</html>

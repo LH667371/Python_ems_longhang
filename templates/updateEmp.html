@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>update Emp</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css"
+          href="../static/css/style.css"/>
+</head>
+
+<body>
+<div id="wrap">
+    <div id="top_content">
+        <div id="header">
+            <div id="rightheader">
+                <p>
+                    2021/02/27
+                    <br/>
+                </p>
+            </div>
+            <div id="topheader">
+                <h1 id="title">
+                    <a href="/emplist/?number={{ number }}">Main</a>
+                </h1>
+            </div>
+            <div id="navigation">
+            </div>
+        </div>
+        <div id="content">
+            <p id="whereami">
+            </p>
+            <h1>
+                update Emp info:
+            </h1>
+            <form action="/update_data/?number={{ number }}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table cellpadding="0" cellspacing="0" border="0"
+                       class="form_table" align="center">
+                    <tr>
+                        <td valign="middle" align="right">
+                            id:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="id" value="{{ data.id }}"
+                                   style="background: none;border: 0" readonly/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            姓名:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="name" value="{{ data.name }}" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            工资:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="salary" value="{{ data.salary }}" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            年龄:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="age" value="{{ data.age }}" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            性别:
+                        </td>
+                        <td valign="middle" align="left">
+                            {% if data.sex == '男' %}
+                                <input type="radio" class="inputgri" name="sex" value="男" checked required/> 男
+                                <input type="radio" class="inputgri" name="sex" value="女" required/> 女
+                            {% else %}
+                                <input type="radio" class="inputgri" name="sex" value="男" required/> 男
+                                <input type="radio" class="inputgri" name="sex" value="女" checked required/> 女
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            出生年月:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="date" style="width: 171px" name="birthday"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            照片:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="file" name="image"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            部门:
+                        </td>
+                        <td valign="middle" align="left">
+                            <select name="department" id="" required>
+                                <option value="">-请选择-</option>
+                                {% for dept in department %}
+                                    {% if data.depart.department == dept.department %}
+                                        <option value="{{ dept.id }}" selected>{{ dept.department }}</option>
+                                    {% else %}
+                                        <option value="{{ dept.id }}">{{ dept.department }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <p align="center">
+                    <input type="submit" class="button" value="Confirm"/>
+                </p>
+            </form>
+
+        </div>
+    </div>
+    <div id="footer">
+        <div id="footer_bg">
+            ABC@126.com
+        </div>
+    </div>
+</div>
+</body>
+</html>
